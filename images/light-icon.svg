@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" style="background: transparent" viewBox="0 0 512 128">
+    <style type="text/css">
+      @import url('https://fonts.googleapis.com/css?family=Inter:800');
+      
+      .sos {
+          fill: #000;
+          font: 54px Inter, sans-serif;
+      }
+    </style>
+  <g transform="translate(1)">
+    <path fill="#000" d="M4 19M29 19 99 19Q124 19 124 44L124 84Q124 109 99 109L29 109Q4 109 4 84L4 44Q4 19 29 19Z"/>
+    <path fill="#fff" d="M18 47.75 33 47.75A1 1 0 0033 40.25L18 40.25A1 1 0 0018 47.75ZM18 67.25 33 67.25A1 1 0 0033 59.75L18 59.75A1 1 0 0018 67.25ZM18 87.25 33 87.25A1 1 0 0033 79.75L18 79.75A1 1 0 0018 87.25ZM46 29 46 99A1 1 0 0053.5 99L53.5 29A1 1 0 0046 29ZM106 59.75M113.5 59.75 96.5 38.5A1 1 0 0091.5 42.5L106 59.75 66 59.75A1 1 0 0066 67.25L106 67.25 91.5 84.5A1 1 0 0096.5 88.5L113.5 67Q116.2 63.375 113.5 59.75Z"/>
+    <text x="140" y="84" class="sos">SOS Emulator</text>
+  </g>
+</svg>

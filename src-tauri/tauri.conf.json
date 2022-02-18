@@ -1,0 +1,67 @@
+{
+  "package": {
+    "productName": "sos-emulator",
+    "version": "1.0.0"
+  },
+  "build": {
+    "distDir": "../dist",
+    "devPath": "http://localhost:3000",
+    "beforeDevCommand": "yarn dev",
+    "beforeBuildCommand": "yarn build"
+  },
+  "tauri": {
+    "bundle": {
+      "active": true,
+      "targets": "all",
+      "identifier": "fr.pharuxtan.sos-emulator",
+      "icon": [ "icons/32x32.png", "icons/128x128.png", "icons/128x128@2x.png", "icons/icon.icns", "icons/icon.ico" ],
+      "resources": [],
+      "externalBin": [],
+      "category": "DeveloperTool",
+      "shortDescription": "Emulate Rocket League SOS Plugin WebSocket",
+      "deb": {
+        "depends": [],
+        "useBootstrapper": false
+      },
+      "macOS": {
+        "frameworks": [],
+        "useBootstrapper": false,
+        "signingIdentity": null,
+        "providerShortName": "pharuxtan"
+      },
+      "windows": {
+        "digestAlgorithm": "sha256",
+        "wix": {
+          "enableElevatedUpdateTask": false,
+          "skipWebviewInstall": false
+        }
+      }
+    },
+    "updater": { "active": false },
+    "systemTray": { "iconPath": "icons/icon" },
+    "allowlist": {
+      "dialog": { 
+        "open": true,
+        "save": true
+      },
+      "fs": {
+        "readFile": true,
+        "writeFile": true
+      }
+    },
+    "windows": [
+      {
+        "title": "SOS Emulator",
+        "center": true,
+        "fileDropEnabled": false,
+        "width": 1024,
+        "height": 576,
+        "resizable": false,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  }
+}
