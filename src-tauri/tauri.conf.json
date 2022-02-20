@@ -1,6 +1,6 @@
 {
   "package": {
-    "productName": "sos-emulator",
+    "productName": "SOS Emulator",
     "version": "1.0.0"
   },
   "build": {
