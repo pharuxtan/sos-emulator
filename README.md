@@ -18,6 +18,6 @@ An application that replicate the [SOS Overlay System](https://gitlab.com/bakkes
 
 ## Todo
 
-- [X] Base application with packets sending
-- [ ] Packets queuing, with import and export for later usage
+- [X] Base application with payloads sending
+- [ ] Payloads queuing, with import and export for later usage
 - [ ] Replay simulator

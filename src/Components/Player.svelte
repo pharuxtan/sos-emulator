@@ -9,7 +9,7 @@
   export let player: Player;
   export let onChange;
 
-  let packet: PlayerType = ObservableSlim.create(player.player, true, onChange);
+  let payload: PlayerType = ObservableSlim.create(player.player, true, onChange);
 
   let extend = false;
 
@@ -18,11 +18,11 @@
     extend = !extend;
   }
 
-  let packet_values: PlayerType = { ...player.player };
+  let payload_values: PlayerType = { ...player.player };
 
   // Name, ID, Primary ID
 
-  let name = `${packet.name} [${packet.id}]`;
+  let name = `${payload.name} [${payload.id}]`;
 
   player.changeName = (name_, id) => {
     name = `${name_} [${id}]`;
@@ -43,10 +43,10 @@
     {value: 1, label: 'ORANGE'}
   ];
 
-  let team = teams[packet.team];
+  let team = teams[payload.team];
 
   function selectTeam(event) {
-    packet.team = event.detail.value;
+    payload.team = event.detail.value;
   }
 
   // Boost
@@ -73,15 +73,15 @@
   }
 
   function inputBoost(){
-    if(this.value == '') return packet.boost = 0;
-    packet.boost = Number(this.value);
+    if(this.value == '') return payload.boost = 0;
+    payload.boost = Number(this.value);
   }
 
   // Speed
 
   function inputSpeed(){
-    if(this.value == '') return packet.speed = 0;
-    packet.speed = parseFloat(this.value);
+    if(this.value == '') return payload.speed = 0;
+    payload.speed = parseFloat(this.value);
   }
 
   // Attacker
@@ -97,8 +97,8 @@
 
   let attacker = noneAttacker;
 
-  if(packet.attacker != ""){
-    let p = sos.players.find(p => p.player.id == packet.attacker);
+  if(payload.attacker != ""){
+    let p = sos.players.find(p => p.player.id == payload.attacker);
     if(p) attacker = attackers.find(a => a.value == p);
   }
 
@@ -123,46 +123,46 @@
   function selectAttacker(event){
     attacker = event.detail;
     if(event.detail.label == "none"){
-      packet.attacker = "";
+      payload.attacker = "";
     } else {
-      packet.attacker = event.detail.label;
+      payload.attacker = event.detail.label;
     }
-    packet.isDead = event.detail.label != "none";
+    payload.isDead = event.detail.label != "none";
   }
 
   // Location
 
   let location = {
-    x: packet.location.X,
-    y :packet.location.Y,
-    z: packet.location.Z,
-    pitch: packet.location.pitch,
-    roll: packet.location.roll,
-    yaw: packet.location.yaw
+    x: payload.location.X,
+    y :payload.location.Y,
+    z: payload.location.Z,
+    pitch: payload.location.pitch,
+    roll: payload.location.roll,
+    yaw: payload.location.yaw
   };
 
   function inputLocation(){
-    if(this.value ==  "" || this.value == "-") return packet.location[this.id] = 0;
-    packet.location[this.id] = parseFloat(this.value);
+    if(this.value ==  "" || this.value == "-") return payload.location[this.id] = 0;
+    payload.location[this.id] = parseFloat(this.value);
   }
 
   // Scoreboard
 
   let scoreboard = {
-    score: packet.score,
-    assists: packet.assists,
-    demos: packet.demos,
-    goals: packet.goals,
-    saves: packet.saves,
-    shots: packet.shots,
-    touches: packet.touches,
-    cartouches: packet.cartouches
+    score: payload.score,
+    assists: payload.assists,
+    demos: payload.demos,
+    goals: payload.goals,
+    saves: payload.saves,
+    shots: payload.shots,
+    touches: payload.touches,
+    cartouches: payload.cartouches
   }
 
   function inputScoreboard(){
     if(this.value ==  "")
-      packet[this.id] = 0;
-    packet[this.id] = parseFloat(this.value);
+      payload[this.id] = 0;
+    payload[this.id] = parseFloat(this.value);
   }
 </script>
 
@@ -176,7 +176,7 @@
   <div class=settings>
     <div class=separator></div>
     <div class=names>
-      <p>Name: <input type=text value={packet_values.name} on:input={inputName} /></p>
+      <p>Name: <input type=text value={payload_values.name} on:input={inputName} /></p>
       <p>Primary ID: <input type=text value={name.split("_")[1].split("]")[0]} readonly /></p>
       <p>ID: <input type=text value={name.split("[")[1].split("]")[0]} readonly /></p>
       <p>Shortcut: <input type=text value={Number(name.split("_")[1].split("]")[0])-1} readonly /></p>
@@ -185,23 +185,23 @@
       <p>Team: </p>
       <Select items={teams} value={team} on:select={selectTeam} isSearchable={false} />
     </div>
-    <p class=boost>Boost: <input type=number min=0 max=100 value={packet_values.boost} on:beforeinput={filterBoost} on:input={inputBoost} /></p>
-    <p>Speed: <input type=text value={packet_values.speed} on:beforeinput={sos.filter.float} on:input={inputSpeed} /></p>
+    <p class=boost>Boost: <input type=number min=0 max=100 value={payload_values.boost} on:beforeinput={filterBoost} on:input={inputBoost} /></p>
+    <p>Speed: <input type=text value={payload_values.speed} on:beforeinput={sos.filter.float} on:input={inputSpeed} /></p>
     <div class=switch>
       <p>Is powersliding:</p>
-      <Switch bind:checked={packet.isPowersliding} handleDiameter={0} width={42} height={20}/>
+      <Switch bind:checked={payload.isPowersliding} handleDiameter={0} width={42} height={20}/>
     </div>
     <div class=switch>
       <p>Is in supersonic:</p>
-      <Switch bind:checked={packet.isSonic} handleDiameter={0} width={42} height={20}/>
+      <Switch bind:checked={payload.isSonic} handleDiameter={0} width={42} height={20}/>
     </div>
     <div class=switch>
       <p>Is on ground:</p>
-      <Switch bind:checked={packet.onGround} handleDiameter={0} width={42} height={20}/>
+      <Switch bind:checked={payload.onGround} handleDiameter={0} width={42} height={20}/>
     </div>
     <div class=switch>
       <p>Is on wall:</p>
-      <Switch bind:checked={packet.onWall} handleDiameter={0} width={42} height={20}/>
+      <Switch bind:checked={payload.onWall} handleDiameter={0} width={42} height={20}/>
     </div>
     <div class=attacker>
       <p>Attacker: </p>

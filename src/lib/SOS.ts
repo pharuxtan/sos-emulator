@@ -1,6 +1,6 @@
 import SOSWebSocket from "./modules/SOSWebSocket";
 import Popup from "./modules/Popup";
-import { Packets } from "./modules/Packets";
+import { Payloads } from "./modules/Payloads";
 import { Player } from "./types/Player";
 import Filter from "./modules/Filter";
 
@@ -14,7 +14,7 @@ class SOS {
   ws: SOSWebSocket = new SOSWebSocket(this);
   popup: Popup = new Popup();
   filter: Filter = new Filter();
-  packets: Packets;
+  payloads: Payloads;
   
   players: Player[] = [];
   nonePlayer: Player = new Player(0, "", -1, undefined, true);
@@ -34,7 +34,7 @@ class SOS {
       match_guid: localStorage.getItem("match_guid")
     }
 
-    this.packets = new Packets(this.ws, this.settings.match_guid);
+    this.payloads = new Payloads(this.ws, this.settings.match_guid);
   }
 
   plChFuncs: Function[] = [];

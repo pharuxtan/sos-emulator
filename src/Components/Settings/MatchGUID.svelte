@@ -13,7 +13,7 @@
   function inputGUID() {
     sos.settings.match_guid = this.value;
     localStorage.setItem("match_guid", sos.settings.match_guid);
-    sos.packets.setGUID(guid);
+    sos.payloads.setGUID(guid);
   }
 </script>
 
@@ -21,8 +21,8 @@
   <p class=title>Match GUID</p>
   <p class=description>
     When you create a match, Rocket League generate a random 32 hex digit guid.<br>
-    Match GUID is sended on all SOS Packets, so you are free to edit it as you want.<br>
-    Can be useful if you want to know if the packet is from SOS Emulator or not
+    Match GUID is sended on all SOS Payloads, so you are free to edit it as you want.<br>
+    Can be useful if you want to know if the payload is from SOS Emulator or not
   </p>
   <p class=guid>Match GUID: <input type=text bind:value={guid} on:input={inputGUID} /></p>
   <buttons>

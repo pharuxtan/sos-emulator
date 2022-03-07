@@ -3,30 +3,30 @@
   import type SOS from "../lib/SOS";
   export let sos: SOS;
 
-	/* Packets */
-	import SosVersion from "./Packets/SOSVersion.svelte";
-	import GameUpdateState from "./Packets/GameUpdateState.svelte";
-	import GameClockStopped from "./Packets/GameClockStopped.svelte";
-	import GameReplayCreated from "./Packets/GameReplayCreated.svelte";
-	import GameMatchCreated from "./Packets/GameMatchCreated.svelte";
-	import GameInitialized from "./Packets/GameInitialized.svelte";
-	import GamePreCountdownBegin from "./Packets/GamePreCountdownBegin.svelte";
-	import GamePostCountdownBegin from "./Packets/GamePostCountdownBegin.svelte";
-	import GameRoundStartedGo from "./Packets/GameRoundStartedGo.svelte";
-	import GameClockStarted from "./Packets/GameClockStarted.svelte";
-	import GameBallHit from "./Packets/GameBallHit.svelte";
-	import GameClockUpdatedSeconds from "./Packets/GameClockUpdatedSeconds.svelte";
-	import GameStatfeedEvent from "./Packets/GameStatfeedEvent.svelte";
-	import GameGoalScored from "./Packets/GameGoalScored.svelte";
-	import GameReplayStart from "./Packets/GameReplayStart.svelte";
-	import GameReplayWillEnd from "./Packets/GameReplayWillEnd.svelte";
-	import GameReplayEnd from "./Packets/GameReplayEnd.svelte";
-	import GameMatchEnded from "./Packets/GameMatchEnded.svelte";
-	import GamePodiumStart from "./Packets/GamePodiumStart.svelte";
-	import GameMatchDestroyed from "./Packets/GameMatchDestroyed.svelte";
+	/* Payloads */
+	import SosVersion from "./Payloads/SOSVersion.svelte";
+	import GameUpdateState from "./Payloads/GameUpdateState.svelte";
+	import GameClockStopped from "./Payloads/GameClockStopped.svelte";
+	import GameReplayCreated from "./Payloads/GameReplayCreated.svelte";
+	import GameMatchCreated from "./Payloads/GameMatchCreated.svelte";
+	import GameInitialized from "./Payloads/GameInitialized.svelte";
+	import GamePreCountdownBegin from "./Payloads/GamePreCountdownBegin.svelte";
+	import GamePostCountdownBegin from "./Payloads/GamePostCountdownBegin.svelte";
+	import GameRoundStartedGo from "./Payloads/GameRoundStartedGo.svelte";
+	import GameClockStarted from "./Payloads/GameClockStarted.svelte";
+	import GameBallHit from "./Payloads/GameBallHit.svelte";
+	import GameClockUpdatedSeconds from "./Payloads/GameClockUpdatedSeconds.svelte";
+	import GameStatfeedEvent from "./Payloads/GameStatfeedEvent.svelte";
+	import GameGoalScored from "./Payloads/GameGoalScored.svelte";
+	import GameReplayStart from "./Payloads/GameReplayStart.svelte";
+	import GameReplayWillEnd from "./Payloads/GameReplayWillEnd.svelte";
+	import GameReplayEnd from "./Payloads/GameReplayEnd.svelte";
+	import GameMatchEnded from "./Payloads/GameMatchEnded.svelte";
+	import GamePodiumStart from "./Payloads/GamePodiumStart.svelte";
+	import GameMatchDestroyed from "./Payloads/GameMatchDestroyed.svelte";
 
 	/* Features */
-	import PacketsQueue from "./Features/PacketsQueue.svelte";
+	import PayloadsQueue from "./Features/PayloadsQueue.svelte";
 	import ReplaySimulator from "./Features/ReplaySimulator.svelte";
 
 	/* Settings */
@@ -35,7 +35,7 @@
 	import AboutSosEmulator from "./Settings/AboutSOSEmulator.svelte";
 
 	let pages = {
-		/* Packets */
+		/* Payloads */
 		sos_version: SosVersion,
 		game_update_state: GameUpdateState,
 		game_clock_stopped: GameClockStopped,
@@ -58,7 +58,7 @@
 		game_match_destroyed: GameMatchDestroyed,
 
 		/* Features */
-		packets_queue: PacketsQueue,
+		payloads_queue: PayloadsQueue,
 		replay_simulator: ReplaySimulator,
 
 		/* Settings */
@@ -91,7 +91,7 @@
 <main>
 	<sidebar on:click={sidebar}>
 		<category>
-			<p class=title>Packets</p>
+			<p class=title>Payloads</p>
 			<contents>
 				<input type=button id=sos_version value="sos:version" disabled={page == "sos_version"} />
 				<input type=button id=game_update_state value="game:update_state" disabled={page == "game_update_state"} />
@@ -118,7 +118,7 @@
 		<category>
 			<p class=title>Features</p>
 			<contents>
-				<input type=button id=packets_queue value="Packets Queue" disabled={page == "packets_queue"} />
+				<input type=button id=payloads_queue value="Payloads Queue" disabled={page == "payloads_queue"} />
 				<input type=button id=replay_simulator value="Replay Simulator" disabled={page == "replay_simulator"} />
 			</contents>
 		</category>
