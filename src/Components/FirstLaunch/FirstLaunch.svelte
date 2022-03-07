@@ -1,10 +1,10 @@
-<script type="ts">
-  import GameGuid from "./GameGUID.svelte";
+<script lang="ts">
+  import MatchGUID from "./MatchGUID.svelte";
   import WebSocket from "./WebSocket.svelte";
   import Welcome from "./Welcome.svelte";
 
 	import { slideSideOut, slideSideIn } from "../../lib/modules/Transitions";
-  import type SOS from "src/lib/SOS";
+  import type SOS from "../../lib/SOS";
 
   export let sos: SOS;
 
@@ -18,11 +18,11 @@
     </div>
   {:else if state == "websocket"}
     <div class=transition in:slideSideIn out:slideSideOut>
-      <WebSocket bind:state={state} sos={sos} />
+      <WebSocket bind:state={state} {sos} />
     </div>
   {:else}
     <div class=transition in:slideSideIn>
-      <GameGuid sos={sos} />
+      <MatchGUID {sos} />
     </div>
   {/if}
 </firstlaunch>

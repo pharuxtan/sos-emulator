@@ -1,5 +1,5 @@
-<script type="ts">
-  import type SOS from "src/lib/SOS";
+<script lang="ts">
+  import type SOS from "../../lib/SOS";
 
   export let sos: SOS;
 
@@ -7,40 +7,33 @@
   
   function generate(){
     guid = sos.guid();
+    inputGUID.call({ value: guid });
   }
 
-  function enter() {
-    sos.settings.match_guid = guid;
-    localStorage.setItem("first_launch", "false");
-    localStorage.setItem("socket_port", sos.settings.socket_port);
-    localStorage.setItem("match_guid", guid);
-    sos.updateFirstLaunch();
+  function inputGUID() {
+    sos.settings.match_guid = this.value;
+    localStorage.setItem("match_guid", sos.settings.match_guid);
+    sos.packets.setGUID(guid);
   }
 </script>
 
-<gameguid>
-  <p class=title>Define a match GUID</p>
+<match_guid>
+  <p class=title>Match GUID</p>
   <p class=description>
     When you create a match, Rocket League generate a random 32 hex digit guid.<br>
     Match GUID is sended on all SOS Packets, so you are free to edit it as you want.<br>
     Can be useful if you want to know if the packet is from SOS Emulator or not
   </p>
-  <p class=guid>Match GUID: <input type=text bind:value={guid} on:keyup={(e) => {if(e.key == "Enter") enter()}} /></p>
+  <p class=guid>Match GUID: <input type=text bind:value={guid} on:input={inputGUID} /></p>
   <buttons>
     <generate class=button on:click={generate}>
       <p>Generate new one</p>
     </generate>
-    <enter class=button on:click={enter}>
-      <p>Enter emulator</p>
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53 53">
-        <path d="M51.4 22.7 34.4 1.45A1 1 0 0029.4 5.45L43.9 22.7 3.9 22.7A1 1 0 003.9 30.2L43.9 30.2 29.4 47.45A1 1 0 0034.4 51.45L51.4 29.95Q54.1 26.325 51.4 22.7Z"/>
-      </svg>
-    </enter>
   </buttons>
-</gameguid>
+</match_guid>
 
 <style lang="scss">
-  gameguid {
+  match_guid {
     position: relative;
     z-index: 1;
     width: 100%;
@@ -63,8 +56,6 @@
     }
 
     .description {
-      margin-top: 10px;
-
       text-align: center;
 
       font-weight: normal;
@@ -72,7 +63,7 @@
     }
 
     .guid {
-      margin-top: 10px;
+      margin-top: 6px;
 
       text-align: center;
 
@@ -95,7 +86,7 @@
 
     buttons {
       position: relative;
-      margin: 15px auto;
+      margin: 10px auto;
       
       display: flex;
       flex-direction: row;
@@ -134,20 +125,6 @@
         height: 50px;
         padding-right: 10px;
         margin-right: 20px;
-      }
-
-      enter {
-        width: 182px;
-        height: 50px;
-
-        svg {
-          margin-right: 10px;
-          
-          width: 30px;
-          height: 30px;
-
-          background-color: #00000000;
-        }
       }
     }
   }

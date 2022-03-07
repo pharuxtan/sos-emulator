@@ -1,5 +1,5 @@
-<script type="ts">
-  import type SOS from "src/lib/SOS";
+<script lang="ts">
+  import type SOS from "../../lib/SOS";
 
   export let sos: SOS;
   export let state;
@@ -82,7 +82,7 @@
     The default port that use SOS is 49122<br>
     Remember, the websocket port can be changed at any moment
   </p>
-  <p class=port>On what port should the emulator open the WebSocket: <input type=text value="49122" on:beforeinput={filter} on:keyup={(e) => {if(e.key == "Enter" || e.keyCode == 13) wsopen()}} /></p>
+  <p class=port>On what port should the emulator open the WebSocket: <input type=text value="49122" on:beforeinput={filter} on:keyup={(e) => {if(e.key == "Enter") wsopen()}} /></p>
   <openws on:click={wsopen}>
     <p>Open WebSocket and continue</p>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 53 53">
@@ -185,7 +185,7 @@
         width: 30px;
         height: 30px;
 
-        background-color: #00000000;
+        background-color: #0000;
       }
     }
   }

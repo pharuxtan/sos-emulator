@@ -47,6 +47,9 @@
       "fs": {
         "readFile": true,
         "writeFile": true
+      },
+      "shell": {
+        "open" : true
       }
     },
     "windows": [

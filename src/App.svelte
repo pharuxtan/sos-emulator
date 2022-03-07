@@ -1,6 +1,7 @@
 <script lang="ts">
-	import Popup from "./Components/Popup.svelte";
+	import Main from "./Components/Main.svelte";
 	import FirstLaunch from "./Components/FirstLaunch/FirstLaunch.svelte";
+	import Popup from "./Components/Popup.svelte";
 
 	import { fade } from 'svelte/transition';
 	import { slideSideOut, slideSideIn } from "./lib/modules/Transitions";
@@ -23,24 +24,13 @@
 </script>
 
 {#if first_launch}
-	<main out:slideSideOut>
-		<FirstLaunch sos={sos} />
-	</main>
+	<div id=main out:slideSideOut>
+		<FirstLaunch {sos} />
+	</div>
 {:else}
-	<main in:slideSideIn={{ base_fl }}>
-		<h1>TODO</h1>	
-	</main>
-
-	<style lang="scss">
-		h1 {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			transform: translate(-50%, -50%);
-
-			font-size: 50px;
-		}
-	</style>
+	<div id=main in:slideSideIn={{ base_fl }}>
+		<Main {sos} />
+	</div>
 {/if}
 
 {#if popup}
@@ -49,15 +39,15 @@
 	</div>
 
 	<style>
-		main {
+		#main {
 			filter: blur(2px);
 		}
 	</style>
 {/if}
 
 <style lang="scss">
-	main {
-    position: absolute;
+	div {
+		position: absolute;
     top: 0px;
     left: 0px;
 
@@ -66,5 +56,6 @@
 
 		z-index: 0;
 		transition: filter .1s;
+		background-color: #0000;
 	}
 </style>

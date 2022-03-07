@@ -1,4 +1,4 @@
-import type { TeamEnum } from "./Team";
+import { TeamEnum } from "./Team";
 
 export type PlayerID = string;
 
@@ -38,18 +38,23 @@ export interface PlayerType {
   saves: number,
   shots: number,
   touches: number, // Ball Touches
-  cartouches: number // Bump
+  cartouches: number // Bump & Demo
 }
 
 export class Player {
   player: PlayerType;
+  uniqueId: string;
+  deleted: boolean = false;
+  isNone: boolean;
 
-  constructor(id: number, name: string, team: TeamEnum, shortcut: number){
-    this.player = {
-      id: `${name}_${id}`,
+  constructor(id: number, name: string, shortcut: number, player?: PlayerType, isNone: boolean = false){
+    this.isNone = isNone;
+    this.uniqueId = Array(64).fill(void 0).map(a => (Math.random()*16 | 0).toString(16)).join('').toUpperCase();
+    this.player = player ? player : {
+      id: id == 0 ? "" : `${name}_${id}`,
       primary_id: ''+id,
       name,
-      team,
+      team: id == 0 ? TeamEnum.NONE : TeamEnum.BLUE,
 
       boost: 33,
       speed: 0,
@@ -81,23 +86,26 @@ export class Player {
     }
   }
 
+  setId(id: number){
+    let old_id = this.player.id;
+    this.player.primary_id = ''+id;
+    this.player.shortcut = id-1;
+    this.player.id = `${this.player.name}_${id}`;
+    this.changeName(this.player.name, this.player.id);
+    if(this.setState)
+      this.setState(old_id, this.player.id);
+  }
+
   setName(name: string){
+    let old_id = this.player.id;
     this.player.name = name;
     this.player.id = `${name}_${this.player.primary_id}`;
-    if(this.setState){
-      this.setState(this.player.id);
-    }
+    this.changeName(this.player.name, this.player.id);
+    if(this.setState)
+      this.setState(old_id, this.player.id);
   }
+
+  changeName: Function;
 
   setState?: Function;
-
-  setDemo(player: PlayerID){
-    if(player == ""){
-      this.player.attacker = "";
-      this.player.isDead = false;
-    } else {
-      this.player.attacker = player;
-      this.player.isDead = true;
-    }
-  }
 }

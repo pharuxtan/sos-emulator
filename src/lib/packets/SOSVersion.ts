@@ -11,6 +11,11 @@ export class SOSVersionPacket {
 
   constructor(ws: SOSWebSocket){
     this.ws = ws;
+    this.newPacket();
+    if(localStorage.getItem(this.packet.event)) this.packet = JSON.parse(localStorage.getItem(this.packet.event));
+  }
+
+  newPacket(){
     this.packet = {
       event: "sos:version",
       data: "1.6.0"

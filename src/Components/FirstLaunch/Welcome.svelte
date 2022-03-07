@@ -1,4 +1,4 @@
-<script type="ts">
+<script lang="ts">
 	import { fly } from 'svelte/transition';
   export let state;
 
@@ -122,7 +122,7 @@
         width: 30px;
         height: 30px;
 
-        background-color: #00000000;
+        background-color: #0000;
       }
     }
   }

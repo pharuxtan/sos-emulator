@@ -1,5 +1,8 @@
 import SOSWebSocket from "./modules/SOSWebSocket";
 import Popup from "./modules/Popup";
+import { Packets } from "./modules/Packets";
+import { Player } from "./types/Player";
+import Filter from "./modules/Filter";
 
 interface settings {
   first_launch: boolean,
@@ -8,15 +11,19 @@ interface settings {
 }
 
 class SOS {
-  ws: SOSWebSocket;
-  popup: Popup;
+  ws: SOSWebSocket = new SOSWebSocket(this);
+  popup: Popup = new Popup();
+  filter: Filter = new Filter();
+  packets: Packets;
+  
+  players: Player[] = [];
+  nonePlayer: Player = new Player(0, "", -1, undefined, true);
 
   settings: settings;
   updateFirstLaunch: Function;
 
   constructor(){
-    this.ws = new SOSWebSocket();
-    this.popup = new Popup();
+    (<any>window).sos = this;
 
     if(localStorage.getItem("first_launch") == null) localStorage.setItem("first_launch", "true");
     if(localStorage.getItem("socket_port") == null) localStorage.setItem("socket_port", "49122");
@@ -26,6 +33,14 @@ class SOS {
       socket_port: localStorage.getItem("socket_port"),
       match_guid: localStorage.getItem("match_guid")
     }
+
+    this.packets = new Packets(this.ws, this.settings.match_guid);
+  }
+
+  plChFuncs: Function[] = [];
+
+  onPlayersChange(func: Function){
+    this.plChFuncs.push(func);
   }
 
   guid(){

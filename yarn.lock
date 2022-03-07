@@ -216,6 +216,11 @@ concat-map@0.0.1:
   resolved "https://registry.yarnpkg.com/concat-map/-/concat-map-0.0.1.tgz#d8a96bd77fd68df7793a73036a3ba0d5405d477b"
   integrity sha1-2Klr13/Wjfd5OnMDajug1UBdR3s=
 
+d3-color@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/d3-color/-/d3-color-2.0.0.tgz#8d625cab42ed9b8f601a1760a389f7ea9189d62e"
+  integrity sha512-SPXi0TSKPD4g9tw0NMZFnR95XVgUZiBH+uUTqQuDu1OsE2zomHU7ho0FISciaPvosimixwHFl3WHLGabv6dDgQ==
+
 debug@^4.3.3:
   version "4.3.3"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.3.tgz#04266e0b70a98d4462e6e288e38259213332b664"
@@ -580,6 +585,11 @@ normalize-range@^0.1.2:
   resolved "https://registry.yarnpkg.com/normalize-range/-/normalize-range-0.1.2.tgz#2d10c06bdfd312ea9777695a4d28439456b75942"
   integrity sha1-LRDAa9/TEuqXd2laTShDlFa3WUI=
 
+observable-slim@^0.1.5:
+  version "0.1.5"
+  resolved "https://registry.yarnpkg.com/observable-slim/-/observable-slim-0.1.5.tgz#ddb30df2db1ee3e5bc409d29268a5766faab6b24"
+  integrity sha512-xhDK4EjwM6ehZ6KhTtDc0z5kqBhqoBQPP9pq2n1c+RXA4IcyLIm68ipDwS3nZVXhrCssoKu4LcHDUT1tl0kP9A==
+
 once@^1.3.0:
   version "1.4.0"
   resolved "https://registry.yarnpkg.com/once/-/once-1.4.0.tgz#583b1aa775961d4b113ac17d9c50baef9dd76bd1"
@@ -758,6 +768,13 @@ svelte-check@^2.2.7:
     svelte-preprocess "^4.0.0"
     typescript "*"
 
+svelte-colorpick@^0.1.7:
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/svelte-colorpick/-/svelte-colorpick-0.1.7.tgz#2f7c5a886d8dc191559b1fc141b84f5e8491acba"
+  integrity sha512-2E7nbweSdl81LtFm8z/hpWEv52cU1jSIiYgTpSpanaBWNiFxr+QT4QMlxFASE/LWACFbm1Xe37ACnIwHxWfr9Q==
+  dependencies:
+    d3-color "^2.0.0"
+
 svelte-hmr@^0.14.9:
   version "0.14.9"
   resolved "https://registry.yarnpkg.com/svelte-hmr/-/svelte-hmr-0.14.9.tgz#35f277efc789e1a6230185717347cddb2f8e9833"
@@ -774,6 +791,16 @@ svelte-preprocess@^4.0.0, svelte-preprocess@^4.10.3:
     magic-string "^0.25.7"
     sorcery "^0.10.0"
     strip-indent "^3.0.0"
+
+svelte-select@^4.4.7:
+  version "4.4.7"
+  resolved "https://registry.yarnpkg.com/svelte-select/-/svelte-select-4.4.7.tgz#fc85414af070487d68e438f7249c653178860af3"
+  integrity sha512-fIf9Z8rPI6F8naHZ9wjXT0Pv5gLyhdHAFkHFJnCfVVfELE8e82uOoF0xEVQP6Kir+b4Q5yOvNAzZ61WbSU6A0A==
+
+svelte-switch@^0.0.5:
+  version "0.0.5"
+  resolved "https://registry.yarnpkg.com/svelte-switch/-/svelte-switch-0.0.5.tgz#2e877c12173173795a1675b059a34666f111c573"
+  integrity sha512-nVKSoOlJe1DNiiOyK/oMkZQwEuDgEq1fNmAYd+724Se8eyN/2HRbYiyOvDpNRpw0jJ+lE5vjLHfCruFrhJQFbA==
 
 svelte@^3.44.0:
   version "3.46.4"

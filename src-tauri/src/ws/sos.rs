@@ -51,7 +51,8 @@ pub fn init_sos_server(window: Window, port: String) -> Result<(), String> {
       let payload: Value = serde_json::from_str(event.payload().unwrap()).unwrap();
       let event_type = payload.get("type").unwrap();
       if event_type == "send" {
-        let json = payload.get("data").unwrap().to_string();
+        let data = payload.get("data").unwrap().to_string();
+        let json = data[1..data.len()-1].replace("\\", "");
         for websocket in websockets.iter_mut() {
           if websocket.can_write() {
             let msg = tungstenite::Message::text(json.clone());

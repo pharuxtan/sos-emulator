@@ -1,6 +1,6 @@
 import type SOSWebSocket from "../modules/SOSWebSocket"
-import type { Player, PlayerID, PlayerType } from "../types/Player";
-import type { TeamType} from "../types/Team";
+import { Player, PlayerID, PlayerType } from "../types/Player";
+import type { TeamType } from "../types/Team";
 import { TeamEnum } from "../types/Team";
 
 export interface game_update_state {
@@ -24,7 +24,7 @@ export interface game_update_state {
       target: PlayerID,
 
       hasWinner: boolean,
-      winner: PlayerID,
+      winner: string, // Has a value when a club (RP) match is finished
 
       isOT: boolean,
       isReplay: boolean,
@@ -43,14 +43,30 @@ export class GameUpdateStatePacket {
 
   constructor(ws: SOSWebSocket, guid: string){
     this.ws = ws;
+    this.newPacket(guid);
+    if(localStorage.getItem(this.packet.event)) this.packet = JSON.parse(localStorage.getItem(this.packet.event));
+
+    for(let player of Object.values(this.packet.data.players).sort((a,b)=>(Number(a.primary_id)-Number(b.primary_id)))){
+      ws.sos.players.push(new Player(0, '', 0, player));
+    }
+  }
+
+  newPacket(guid?: string){
+    if(!guid) guid = this.packet.data.match_guid;
+    
+    // Reset players
+    for(let player of this.ws.sos.players){
+      player.setState(false);
+    }
+
     this.packet = {
       event: "game:update_state",
       data: {
         event: "gamestate",
         game: {
-          arena: "",
-          time_milliseconds: 0.0,
-          time_seconds: 0,
+          arena: "Stadium_P",
+          time_milliseconds: 300.0,
+          time_seconds: 300,
           teams: [
             {
               color_primary: "1873FF",
@@ -90,26 +106,6 @@ export class GameUpdateStatePacket {
   sendPacket(){
     this.ws.send(JSON.stringify(this.packet));
   }
-  
-  addPlayer(playerClass: Player){
-    let player: PlayerType = playerClass.player;
-    let packet = this.packet, old_id = player.id;
-    packet.data.players[old_id] = player;
-
-    playerClass.setState = (id: string) => {
-      delete packet.data.players[old_id];
-      packet.data.players[old_id = id] = player;
-    }
-  }
-
-  removePlayer(player: Player){
-    delete this.packet.data.players[player.player.id];
-  }
-
-  setTime(time: number){
-    this.packet.data.game.time_milliseconds = time;
-    this.packet.data.game.time_seconds = Math.round(time);
-  }
 
   clone(): GameUpdateStatePacket {
     let packet = new GameUpdateStatePacket(this.ws, this.packet.data.match_guid);
@@ -119,5 +115,6 @@ export class GameUpdateStatePacket {
 
   setGUID(guid: string){
     this.packet.data.match_guid = guid;
+    localStorage.setItem("game:update_state", JSON.stringify(this.packet));
   }
 }

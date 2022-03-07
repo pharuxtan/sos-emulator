@@ -24,6 +24,11 @@
     "vite": "^2.8.0"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1.0.0-rc.1"
+    "@tauri-apps/api": "^1.0.0-rc.1",
+    "observable-slim": "^0.1.5",
+    "postcss": "^8.4.6",
+    "svelte-colorpick": "^0.1.7",
+    "svelte-select": "^4.4.7",
+    "svelte-switch": "^0.0.5"
   }
 }

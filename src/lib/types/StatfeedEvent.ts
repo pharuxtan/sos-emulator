@@ -1,16 +1,16 @@
 export enum StatfeedEvent {
-  // After match
+  // Winner
   Win = "Win",
   MVP = "MVP",
 
   // Goals
   Goal = "Goal",
+  OvertimeGoal = "Overtime Goal",
   AerialGoal = "Aerial Goal",
   BackwardsGoal = "Backwards Goal",
   BicycleGoal = "Bicycle Goal",
   LongGoal = "Long Goal",
   TurtleGoal = "Turtle Goal",
-  OvertimeGoal = "Overtime Goal",
   HoopsSwishGoal = "Swish Goal",
 
   // Assists
@@ -34,7 +34,20 @@ export enum StatfeedEvent {
   BreakoutDamage = "Damage",
   BreakoutDamageLarge = "Ultra Damage",
 
-  // Misc
+  // Miscellaneous
   BicycleHit = "Bicycle Hit",
-  HatTrick = "Hat Trick"
+  HatTrick = "Hat Trick",
+  HighFive = "High Five",
+  LowFive = "Low Five"
+}
+
+export const Categories = {
+  "Winner": ["Win", "MVP"],
+  "Goals": ["Goal", "OvertimeGoal", "AerialGoal", "BackwardsGoal", "BicycleGoal", "LongGoal", "TurtleGoal", "HoopsSwishGoal"],
+  "Assists": ["Assist", "Playmaker"],
+  "Saves": ["Save", "EpicSave", "Savior"],
+  "Shots": ["Shot", "PoolShot"],
+  "Demolitions": ["Demolish", "Demolition"],
+  "Dropshot": ["BreakoutDamage", "BreakoutDamageLarge"],
+  "Miscellaneous": ["BicycleHit", "HatTrick", "HighFive", "LowFive"]
 }

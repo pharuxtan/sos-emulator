@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
   export let popup;
 </script>
 
@@ -8,7 +8,7 @@
     <p class=description>{popup.description}</p>
     <actions>
       {#each popup.actions as action, i}
-        <input type=button class="action {i == popup.actions.length-1 ? "main" : ""}" value={action.name} on:click={() => action.callback()}>
+        <input type=button class="action {i == popup.actions.length-1 ? "main" : ""}" value={action.name} on:click={action.callback}>
       {/each}
     </actions>
   </popup>

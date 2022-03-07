@@ -15,6 +15,12 @@ export class GameMatchEndedPacket {
 
   constructor(ws: SOSWebSocket, guid: string){
     this.ws = ws;
+    this.newPacket(guid);
+    if(localStorage.getItem(this.packet.event)) this.packet = JSON.parse(localStorage.getItem(this.packet.event));
+  }
+
+  newPacket(guid?: string){
+    if(!guid) guid = this.packet.data.match_guid;
     this.packet = {
       event: "game:match_ended",
       data: { match_guid: guid, winner_team_num: TeamEnum.BLUE }
@@ -33,6 +39,7 @@ export class GameMatchEndedPacket {
 
   setGUID(guid: string){
     this.packet.data.match_guid = guid;
+    localStorage.setItem("game:match_ended", JSON.stringify(this.packet));
   }
   
   setWinner(winner: TeamEnum){

@@ -1,5 +1,5 @@
 import type SOSWebSocket from "../modules/SOSWebSocket"
-import type { PlayerType } from "../types/Player";
+import type { Player } from "../types/Player";
 
 export interface game_ball_hit {
   event: string,
@@ -20,9 +20,29 @@ export interface game_ball_hit {
 export class GameBallHitPacket {
   packet: game_ball_hit;
   ws: SOSWebSocket;
+  player: Player;
 
   constructor(ws: SOSWebSocket, guid: string){
     this.ws = ws;
+    this.newPacket(guid);
+    if(localStorage.getItem(this.packet.event)) this.packet = JSON.parse(localStorage.getItem(this.packet.event));
+
+    // Detect player changes
+    this.ws.sos.onPlayersChange((players) => {
+      if(players.indexOf(this.player) == -1){
+        this.player = this.ws.sos.nonePlayer;
+        this.packet.data.player = { id: "", name: "" };
+      } else if(this.player.player.id != this.packet.data.player.id) {
+        this.packet.data.player = {
+          id: this.player.player.id,
+          name: this.player.player.name
+        }
+      }
+    });
+  }
+
+  newPacket(guid?: string){
+    if(!guid) guid = this.packet.data.match_guid;
     this.packet = {
       event: "game:ball_hit",
       data: {
@@ -35,6 +55,21 @@ export class GameBallHitPacket {
         match_guid: guid
       }
     }
+
+    // Assign player
+    this.player = this.ws.sos.nonePlayer;
+    if(this.packet.data.player.id != ""){
+      let p = this.ws.sos.players.find(p => p.player.id == this.packet.data.player.id);
+      if(p) this.player = p;
+    }
+  }
+
+  setPlayer(player: Player, packet: game_ball_hit){
+    this.player = player;
+    packet.data.player = {
+      name: player.player.name,
+      id: player.player.id
+    };
   }
 
   sendPacket(){
@@ -47,14 +82,8 @@ export class GameBallHitPacket {
     return packet;
   }
 
-  setPlayer(player: PlayerType){
-    this.packet.data.player = {
-      name: player.name,
-      id: player.id
-    }
-  }
-
   setGUID(guid: string){
     this.packet.data.match_guid = guid;
+    localStorage.setItem("game:ball_hit", JSON.stringify(this.packet));
   }
 }
