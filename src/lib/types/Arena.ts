@@ -43,6 +43,7 @@ export enum Arena {
 
   // Neo Tokyo
   NeoTokyo_Standard_P = "Neo Tokyo",
+  NeoTokyo_Toon_p = "Neo Tokyo (Comic)",
 
   // AquaDome
   Underwater_P = "AquaDome",
