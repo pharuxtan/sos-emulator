@@ -1,4 +1,4 @@
-import type SOSWebSocket from "../modules/SOSWebSocket"
+import type SOSWebSocket from "../modules/SOSWebSocket";
 import { Player, PlayerID, PlayerType } from "../types/Player";
 import type { TeamType } from "../types/Team";
 import { TeamEnum } from "../types/Team";
@@ -103,14 +103,27 @@ export class GameUpdateStatePayload {
     }
   }
 
+  fromQueue(payload: game_update_state){
+    this.payload = payload;
+    this.payload.data.match_guid = this.ws.sos.settings.match_guid;
+
+    // Reset players
+    for(let player of this.ws.sos.players){
+      player.setState(false);
+    }
+
+    // Setup new players
+    for(let player of Object.values(this.payload.data.players).sort((a,b)=>(Number(a.primary_id)-Number(b.primary_id)))){
+      this.ws.sos.players.push(new Player(0, '', 0, player));
+    }
+  }
+
   sendPayload(){
     this.ws.send(JSON.stringify(this.payload));
   }
 
-  clone(): GameUpdateStatePayload {
-    let payload = new GameUpdateStatePayload(this.ws, this.payload.data.match_guid);
-    payload.payload = this.payload;
-    return payload;
+  clonePayload(): game_update_state {
+    return {...this.payload};
   }
 
   setGUID(guid: string){

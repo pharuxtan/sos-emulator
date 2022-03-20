@@ -76,10 +76,8 @@ export class GameBallHitPayload {
     this.ws.send(JSON.stringify(this.payload));
   }
 
-  clone(): GameBallHitPayload {
-    let payload = new GameBallHitPayload(this.ws, this.payload.data.match_guid);
-    payload.payload = this.payload;
-    return payload;
+  clonePayload(): game_ball_hit {
+    return {...this.payload};
   }
 
   setGUID(guid: string){

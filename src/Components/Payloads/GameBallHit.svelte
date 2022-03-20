@@ -29,6 +29,7 @@
   let player = game_ball_hit.player.isNone ? nonePlayer : players.find(p => p.value == game_ball_hit.player);
 
   function selectPlayer(event){
+    player = event.detail;
     game_ball_hit.setPlayer(event.detail.value, payload);
   }
 
@@ -57,10 +58,10 @@
     payload.data.ball.post_hit_speed = speed;
   }
 
-  // Send Payload
+  // Send Payload & Add to Queue
 
-  function sendPayload(){
-    if(!player.value.isNone) return game_ball_hit.sendPayload();
+  function check(cb){
+    if(!player.value.isNone) return cb();
     sos.popup.showPopup(
       "No player is touching the ball?",
       "You need to select a player before sending this payload",
@@ -94,7 +95,7 @@
   <div class=player>
     <p>Player:</p>
     <Select items={players} value={player} noOptionsMessage="There is no player in game:update_state" on:select={selectPlayer} />
-  </div>
+  </div> 
   <div class=ball>
     <p class=category>Ball</p>
     <div class=location>
@@ -108,8 +109,9 @@
     <p class=speed>Pre Hit Speed: <input type=text bind:value={ball.pre_speed} on:beforeinput={sos.filter.float} on:input={inputPreSpeed} /></p>
     <p class=speed>Post Hit Speed: <input type=text bind:value={ball.post_speed} on:beforeinput={sos.filter.float} on:input={inputPostSpeed} /></p>
   </div>
-  <input type=button on:click={sendPayload} value="Send the payload" />
+  <input type=button on:click={() => check(() => game_ball_hit.sendPayload())} value="Send the payload" />
   <input type=button on:click={resetPayload} value="Reset the payload" />
+  <input type=button on:click={() => check(() => sos.payloads.addToQueue(game_ball_hit.clonePayload()))} value="Add payload to queue" />
   <p class=sent>What will be sent:</p>
   <pre>{@html code}</pre>
 </game:ball_hit>

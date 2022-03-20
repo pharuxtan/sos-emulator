@@ -1,7 +1,6 @@
 import { readTextFile, writeFile } from "@tauri-apps/api/fs";
 import type SOSWebSocket from "./SOSWebSocket";
 
-import { GameReplayCreatedPayload, game_replay_created } from "../payloads/GameReplayCreated";
 import { GameBallHitPayload, game_ball_hit } from "../payloads/GameBallHit";
 import { GameClockStartedPayload, game_clock_started } from "../payloads/GameClockStarted";
 import { GameClockStoppedPayload, game_clock_stopped } from "../payloads/GameClockStopped";
@@ -14,6 +13,7 @@ import { GameMatchEndedPayload, game_match_ended } from "../payloads/GameMatchEn
 import { GamePodiumStartPayload, game_podium_start } from "../payloads/GamePodiumStart";
 import { GamePostCountdownBeginPayload, game_post_countdown_begin } from "../payloads/GamePostCountdownBegin";
 import { GamePreCountdownBeginPayload, game_pre_countdown_begin } from "../payloads/GamePreCountdownBegin";
+import { GameReplayCreatedPayload, game_replay_created } from "../payloads/GameReplayCreated";
 import { GameReplayEndPayload, game_replay_end } from "../payloads/GameReplayEnd";
 import { GameReplayStartPayload, game_replay_start } from "../payloads/GameReplayStart";
 import { GameReplayWillEndPayload, game_replay_will_end } from "../payloads/GameReplayWillEnd";
@@ -23,25 +23,34 @@ import { GameUpdateStatePayload, game_update_state } from "../payloads/GameUpdat
 import { SOSVersionPayload, sos_version } from "../payloads/SOSVersion";
 
 export type payload = sos_version |
-                                           game_update_state |
-                                           game_statfeed_event |
-                                           game_round_started_go |
-                                           game_replay_will_end |
-                                           game_replay_start |
-                                           game_replay_end |
-                                           game_pre_countdown_begin |
-                                           game_post_countdown_begin |
-                                           game_podium_start |
-                                           game_match_ended |
-                                           game_match_destroyed |
-                                           game_match_created |
-                                           game_initialized |
-                                           game_goal_scored |
-                                           game_clock_updated_seconds |
-                                           game_clock_stopped |
-                                           game_clock_started |
-                                           game_ball_hit |
-                                           game_replay_created;
+                      game_update_state |
+                      game_statfeed_event |
+                      game_round_started_go |
+                      game_replay_will_end |
+                      game_replay_start |
+                      game_replay_end |
+                      game_replay_created |
+                      game_pre_countdown_begin |
+                      game_post_countdown_begin |
+                      game_podium_start |
+                      game_match_ended |
+                      game_match_destroyed |
+                      game_match_created |
+                      game_initialized |
+                      game_goal_scored |
+                      game_clock_updated_seconds |
+                      game_clock_stopped |
+                      game_clock_started |
+                      game_ball_hit;
+
+export type queue_item = {
+  name: string,
+  payload?: payload,
+  time?: number,
+  startpoint: boolean,
+  breakpoint: boolean,
+  executed: boolean
+}
 
 export class Payloads {
   // Payloads storing
@@ -111,23 +120,74 @@ export class Payloads {
   }
 
   // Queue
-  payloads_queue: payload[] = [];
+  payloads_queue: queue_item[] = JSON.parse(localStorage.getItem("queue") || "[]");
 
   addToQueue(payload: payload){
-    this.payloads_queue.push(payload);
+    this.payloads_queue.push({
+      name: payload.event,
+      payload,
+      startpoint: false,
+      breakpoint: false,
+      executed: false
+    });
+    this.saveQueue();
   }
 
-  removeFromQueue(id: number){
-    this.payloads_queue.splice(id, 1);
+  saveQueue(){
+    localStorage.setItem("queue", JSON.stringify(this.payloads_queue));
   }
 
-  async importJson(path: string){
-    let json = JSON.parse(await readTextFile(path));
-    // TODO: input json filter
-    return this.payloads_queue = json;
+  async importJson(path){
+    let queue: queue_item[] = [];
+    try {
+      let json = JSON.parse(await readTextFile(path));
+      if(!Array.isArray(json)) throw { message: "JSON is not an array" };
+      for(let item of json){
+        if(!item.event || typeof item.event != "string") continue;
+        if(item.event == "time"){
+          queue.push({
+            name: "Timer",
+            time: item.time,
+            startpoint: false,
+            breakpoint: false,
+            executed: false
+          });
+        } else {
+          queue.push({
+            name: item.event,
+            payload: item,
+            startpoint: false,
+            breakpoint: false,
+            executed: false
+          });
+        }
+      }
+    } catch(e){
+      throw e;
+    }
+    return queue;
   }
 
   async exportJson(path: string){
-    return await writeFile({ path, contents: JSON.stringify(this.payloads_queue) });
+    let json = [];
+    for(let item of this.payloads_queue){
+      if(item.name == "Timer"){
+        json.push({
+          event: "time",
+          time: item.time
+        })
+      } else {
+        json.push(item.payload);
+      }
+    }
+    return await writeFile({ path, contents: JSON.stringify(json) });
   }
+
+  payload_info = class PayloadInfo {
+    static toggle: Function;
+    static index: number;
+    static item: queue_item;
+  }
+
+  record_rl: Function;
 }

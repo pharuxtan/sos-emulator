@@ -46,8 +46,9 @@
     <p>Winner Team: </p>
     <Select items={teams} {value} on:select={select} isSearchable={false} />
   </div>
-  <input type=button on:click={game_match_ended.sendPayload} value="Send the payload" />
+  <input type=button on:click={() => game_match_ended.sendPayload()} value="Send the payload" />
   <input type=button on:click={resetPayload} value="Reset the payload" />
+  <input type=button on:click={() => sos.payloads.addToQueue(game_match_ended.clonePayload())} value="Add payload to queue" />
   <p class=sent>What will be sent:</p>
   <pre>{@html code}</pre>
 </game:match_ended>

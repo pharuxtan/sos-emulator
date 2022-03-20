@@ -23,10 +23,8 @@ export class GameClockStartedPayload {
     this.ws.send(JSON.stringify(this.payload));
   }
 
-  clone(): GameClockStartedPayload {
-    let payload = new GameClockStartedPayload(this.ws, this.payload.data.match_guid);
-    payload.payload = this.payload;
-    return payload;
+  clonePayload(): game_clock_started {
+    return {...this.payload};
   }
 
   setGUID(guid: string){

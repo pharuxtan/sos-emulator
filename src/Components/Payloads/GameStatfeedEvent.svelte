@@ -93,10 +93,10 @@
     if(!event.isFromUpdater) updatePlayers();
   }
 
-  // Send Payload
+  // Send Payload & Add to Queue
 
-  function sendPayload(){
-    if(!main.value.isNone) return game_statfeed_event.sendPayload();
+  function check(cb){
+    if(!main.value.isNone) return cb();
     sos.popup.showPopup(
       "No player is triggering the event?",
       "You need to select the main target before sending this payload",
@@ -139,8 +139,9 @@
     {/key} {/key}
   </div>
   <p>Note: secondary target is only sent on <strong>Demolish</strong> event and is the attacker</p>
-  <input type=button on:click={sendPayload} value="Send the payload" />
+  <input type=button on:click={() => check(() => game_statfeed_event.sendPayload())} value="Send the payload" />
   <input type=button on:click={resetPayload} value="Reset the payload" />
+  <input type=button on:click={() => check(() => sos.payloads.addToQueue(game_statfeed_event.clonePayload()))} value="Add payload to queue" />
   <p class=sent>What will be sent:</p>
   <pre>{@html code}</pre>
 </game:statfeed_event>

@@ -12,7 +12,8 @@
   <p class=title>game:replay_will_end</p>
   <p class=description>This payload is sent when a goal replay will end (mean that ball got into the goal).</p>
   <div class=separator></div>
-  <input type=button on:click={game_replay_will_end.sendPayload} value="Send the payload" />
+  <input type=button on:click={() => game_replay_will_end.sendPayload()} value="Send the payload" />
+  <input type=button on:click={() => sos.payloads.addToQueue(game_replay_will_end.clonePayload())} value="Add payload to queue" />
   <p class=sent>What will be sent:</p>
   <pre>{@html code}</pre>
 </game:replay_will_end>

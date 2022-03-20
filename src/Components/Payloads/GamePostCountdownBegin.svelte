@@ -12,7 +12,8 @@
   <p class=title>game:post_countdown_begin</p>
   <p class=description>This payload is sent to confirm that the kickoff timer has started</p>
   <div class=separator></div>
-  <input type=button on:click={game_post_countdown_begin.sendPayload} value="Send the payload" />
+  <input type=button on:click={() => game_post_countdown_begin.sendPayload()} value="Send the payload" />
+  <input type=button on:click={() => sos.payloads.addToQueue(game_post_countdown_begin.clonePayload())} value="Add payload to queue" />
   <p class=sent>What will be sent:</p>
   <pre>{@html code}</pre>
 </game:post_countdown_begin>

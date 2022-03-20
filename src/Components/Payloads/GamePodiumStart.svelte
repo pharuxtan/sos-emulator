@@ -12,7 +12,8 @@
   <p class=title>game:podium_start</p>
   <p class=description>This payload is sent when celebration scene after the match end is shown</p>
   <div class=separator></div>
-  <input type=button on:click={game_podium_start.sendPayload} value="Send the payload" />
+  <input type=button on:click={() => game_podium_start.sendPayload()} value="Send the payload" />
+  <input type=button on:click={() => sos.payloads.addToQueue(game_podium_start.clonePayload())} value="Add payload to queue" />
   <p class=sent>What will be sent:</p>
   <pre>{@html code}</pre>
 </game:podium_start>

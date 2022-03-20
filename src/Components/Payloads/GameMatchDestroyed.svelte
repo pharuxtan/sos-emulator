@@ -12,7 +12,8 @@
   <p class=title>game:match_destroyed</p>
   <p class=description>This payload is sent when you quit a match/replay.</p>
   <div class=separator></div>
-  <input type=button on:click={game_match_destroyed.sendPayload} value="Send the payload" />
+  <input type=button on:click={() => game_match_destroyed.sendPayload()} value="Send the payload" />
+  <input type=button on:click={() => sos.payloads.addToQueue(game_match_destroyed.clonePayload())} value="Add payload to queue" />
   <p class=sent>What will be sent:</p>
   <pre>{@html code}</pre>
 </game:match_destroyed>

@@ -12,7 +12,8 @@
   <p class=title>game:match_created</p>
   <p class=description>This payload is sent when you join/create a match or when you start a replay.</p>
   <div class=separator></div>
-  <input type=button on:click={game_match_created.sendPayload} value="Send the payload" />
+  <input type=button on:click={() => game_match_created.sendPayload()} value="Send the payload" />
+  <input type=button on:click={() => sos.payloads.addToQueue(game_match_created.clonePayload())} value="Add payload to queue" />
   <p class=sent>What will be sent:</p>
   <pre>{@html code}</pre>
 </game:match_created>

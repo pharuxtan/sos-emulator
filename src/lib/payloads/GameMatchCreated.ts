@@ -23,10 +23,8 @@ export class GameMatchCreatedPayload {
     this.ws.send(JSON.stringify(this.payload));
   }
 
-  clone(): GameMatchCreatedPayload {
-    let payload = new GameMatchCreatedPayload(this.ws, this.payload.data.match_guid);
-    payload.payload = this.payload;
-    return payload;
+  clonePayload(): game_match_created {
+    return {...this.payload};
   }
 
   setGUID(guid: string){

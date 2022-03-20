@@ -341,8 +341,9 @@
       <input type=button on:click={addPlayer} value="Add a new player" />
     </div>
   </div>
-  <input type=button on:click={game_update_state.sendPayload} value="Send the payload" />
+  <input type=button on:click={() => game_update_state.sendPayload()} value="Send the payload" />
   <input type=button on:click={resetPayload} value="Reset the payload" />
+  <input type=button on:click={() => sos.payloads.addToQueue(game_update_state.clonePayload())} value="Add payload to queue" />
   <p class=sent>What will be sent:</p>
   <pre>{@html code}</pre>
 </game:update_state>

@@ -21,9 +21,7 @@ export class GameRoundStartedGoPayload {
     this.ws.send(JSON.stringify(this.payload));
   }
 
-  clone(): GameRoundStartedGoPayload {
-    let payload = new GameRoundStartedGoPayload(this.ws);
-    payload.payload = this.payload;
-    return payload;
+  clonePayload(): game_round_started_go {
+    return {...this.payload};
   }
 }

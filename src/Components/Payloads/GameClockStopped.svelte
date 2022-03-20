@@ -12,7 +12,8 @@
   <p class=title>game:clock_stopped</p>
   <p class=description>This payload is sent when the match time is stopped.</p>
   <div class=separator></div>
-  <input type=button on:click={game_clock_stopped.sendPayload} value="Send the payload" />
+  <input type=button on:click={() => game_clock_stopped.sendPayload()} value="Send the payload" />
+  <input type=button on:click={() => sos.payloads.addToQueue(game_clock_stopped.clonePayload())} value="Add payload to queue" />
   <p class=sent>What will be sent:</p>
   <pre>{@html code}</pre>
 </game:clock_stopped>

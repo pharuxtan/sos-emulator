@@ -103,10 +103,8 @@ export class GameStatfeedEventPayload {
     this.ws.send(JSON.stringify(this.payload));
   }
 
-  clone(): GameStatfeedEventPayload {
-    let payload = new GameStatfeedEventPayload(this.ws, this.payload.data.match_guid);
-    payload.payload = this.payload;
-    return payload;
+  clonePayload(): game_statfeed_event {
+    return {...this.payload};
   }
 
   setGUID(guid: string){

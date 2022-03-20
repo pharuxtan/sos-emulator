@@ -8,7 +8,7 @@
   if(!sos.ws.opened_before){
     sos.ws.opened_before = true
     if(sos.settings.socket_port != "0") openWebSocket(sos.settings.socket_port);
-  } else {
+  } else if(sos.ws.opened) {
     status = "OPEN";
   }
 
@@ -61,7 +61,6 @@
   }
 
   async function openWebSocket(port: string){
-    console.log(port);
     status = "STARTING";
     try {
       await sos.ws.open(port);

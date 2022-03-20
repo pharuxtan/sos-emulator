@@ -1,17 +1,17 @@
 <script lang="ts">
-  export let popup;
+  import HighlightPayloadJSON from "../lib/modules/HighlightPayloadJSON";
+  export let info;
 </script>
 
 <background>
-  <popup>
-    <p class=title>{popup.title}</p>
-    <p class=description>{popup.description}</p>
-    <actions>
-      {#each popup.actions as action, i}
-        <input type=button class=action class:main={i == popup.actions.length-1} value={action.name} on:click={action.callback}>
-      {/each}
-    </actions>
-  </popup>
+  <payload_info>
+    <p class=name>{info.item.name}</p>
+    <p class=index>{info.item.name != "Timer" ? "Payload" : "Timer"} is at index {info.index}</p>
+    {#if info.item.payload}
+      <pre>{@html HighlightPayloadJSON(info.item.payload)}</pre>
+    {/if}
+    <div class=button><input type=button value="Quit" on:click={info.toggle(false)}></div>
+  </payload_info>
 </background>
 
 <style lang="scss">
@@ -27,11 +27,17 @@
 
     background-color: #00000020;
 
-    popup {
+    payload_info {
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
+
+      min-width: 300px;
+      max-width: 900px;
+      max-height: 480px;
+
+      overflow-x: auto;
 
       display: flex;
       flex-direction: column;
@@ -42,22 +48,28 @@
       background-color: #FFFFFF;
       box-shadow: 0 3px 2px -2px gray;
 
-      .title {
+      pre {
         width: max-content;
-        margin-top: 10px;
+        overflow-y: auto;
+        margin-bottom: 0px;
+      }
+
+      .name {
+        width: max-content;
+        margin-top: 5px;
         font-weight: bold;
         font-size: 20px;
       }
 
-      .description {
-        margin-top: 15px;
+      .index {
+        margin-top: 10px;
 
         width: 100%;
-        font-size: 20px;
+        font-size: 16px;
       }
 
-      actions {
-        margin-top: 15px;
+      .button {
+        margin-top: 10px;
         
         width: 100%;
         height: 40px;
@@ -87,19 +99,6 @@
           }
 
           box-shadow: rgb(255 255 255 / 0%) 0 0 0 3px, rgb(0 102 255 / 0%) 0 0 0 4px;
-          
-          &.main {
-            color: #FFFFFF;
-            background-color: #06f;
-
-            &:hover {
-              background-color: rgb(0, 94, 235);
-            }
-
-            &:active {
-              background-color: rgb(0, 87, 218);
-            }
-          }
         }
       }
     }

@@ -131,10 +131,10 @@
     payload.data.ball_last_touch.speed = parseFloat(this.value);
   }
 
-  // Send Payload
+  // Send Payload & Add to Queue
 
-  function sendPayload(){
-    if(!scorer.value.isNone) return game_goal_scored.sendPayload();
+  function check(cb){
+    if(!scorer.value.isNone) return cb();
     sos.popup.showPopup(
       "No player is scoring the ball?",
       "Unfortunately SOS don't send goal scored with no player, so you need to set a scorer",
@@ -194,8 +194,9 @@
     </div>
     <p class=values>Speed: <input type=text bind:value={static_values.last_speed} on:beforeinput={sos.filter.float} on:input={inputLastSpeed} /></p>
   </div>
-  <input type=button on:click={sendPayload} value="Send the payload" />
+  <input type=button on:click={() => check(() => game_goal_scored.sendPayload())} value="Send the payload" />
   <input type=button on:click={resetPayload} value="Reset the payload" />
+  <input type=button on:click={() => check(() => sos.payloads.addToQueue(game_goal_scored.clonePayload()))} value="Add payload to queue" />
   <p class=sent>What will be sent:</p>
   <pre>{@html code}</pre>
 </game:goal_scored>

@@ -12,7 +12,8 @@
   <p class=title>game:round_started_go</p>
   <p class=description>This payload is sent when the players can move after the kick off timer</p>
   <div class=separator></div>
-  <input type=button on:click={game_round_started_go.sendPayload} value="Send the payload" />
+  <input type=button on:click={() => game_round_started_go.sendPayload()} value="Send the payload" />
+  <input type=button on:click={() => sos.payloads.addToQueue(game_round_started_go.clonePayload())} value="Add payload to queue" />
   <p class=sent>What will be sent:</p>
   <pre>{@html code}</pre>
 </game:round_started_go>

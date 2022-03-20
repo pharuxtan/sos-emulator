@@ -26,10 +26,8 @@ export class SOSVersionPayload {
     this.ws.send(JSON.stringify(this.payload));
   }
 
-  clone(): SOSVersionPayload {
-    let payload = new SOSVersionPayload(this.ws);
-    payload.payload = this.payload;
-    return payload;
+  clonePayload(): sos_version {
+    return {...this.payload};
   }
 
   getVersion(): string {

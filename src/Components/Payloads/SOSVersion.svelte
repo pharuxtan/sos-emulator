@@ -4,6 +4,7 @@
   import ObservableSlim from "observable-slim";
   import type SOS from "../../lib/SOS";
   import type { sos_version } from "../../lib/payloads/SOSVersion";
+import GameBallHit from "./GameBallHit.svelte";
 
   export let sos: SOS;
   let sos_version = sos.payloads.sos_version;
@@ -31,8 +32,9 @@
   <p class=description>This payload contain the SOS version and is sended when the websocket is connected</p>
   <div class=separator></div>
   <p class=version>SOS Version: <input type=text bind:value={payload.data} /></p>
-  <input type=button on:click={sos_version.sendPayload} value="Send the payload" />
+  <input type=button on:click={() => sos_version.sendPayload()} value="Send the payload" />
   <input type=button on:click={resetPayload} value="Reset the payload" />
+  <input type=button on:click={() => sos.payloads.addToQueue(sos_version.clonePayload())} value="Add payload to queue" />
   <p class=sent>What will be sent:</p>
   <pre>{@html code}</pre>
 </sos:version>

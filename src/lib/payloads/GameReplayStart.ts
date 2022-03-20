@@ -24,10 +24,8 @@ export class GameReplayStartPayload {
     this.ws.send(JSON.stringify(this.payload));
   }
 
-  clone(): GameReplayStartPayload {
-    let payload = new GameReplayStartPayload(this.ws, this.payload.data.match_guid);
-    payload.payload = this.payload;
-    return payload;
+  clonePayload(): game_replay_start {
+    return {...this.payload};
   }
 
   setGUID(guid: string){

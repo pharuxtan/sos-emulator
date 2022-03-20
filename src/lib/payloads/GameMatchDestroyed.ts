@@ -23,10 +23,8 @@ export class GameMatchDestroyedPayload {
     this.ws.send(JSON.stringify(this.payload));
   }
 
-  clone(): GameMatchDestroyedPayload {
-    let payload = new GameMatchDestroyedPayload(this.ws, this.payload.data.match_guid);
-    payload.payload = this.payload;
-    return payload;
+  clonePayload(): game_match_destroyed {
+    return {...this.payload};
   }
 
   setGUID(guid: string){

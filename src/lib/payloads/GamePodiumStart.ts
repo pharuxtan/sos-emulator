@@ -23,10 +23,8 @@ export class GamePodiumStartPayload {
     this.ws.send(JSON.stringify(this.payload));
   }
 
-  clone(): GamePodiumStartPayload {
-    let payload = new GamePodiumStartPayload(this.ws, this.payload.data.match_guid);
-    payload.payload = this.payload;
-    return payload;
+  clonePayload(): game_podium_start {
+    return {...this.payload};
   }
 
   setGUID(guid: string){
