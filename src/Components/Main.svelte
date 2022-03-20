@@ -119,7 +119,7 @@
 			<p class=title>Features</p>
 			<contents>
 				<input type=button id=payloads_queue value="Payloads Queue" disabled={page == "payloads_queue"} />
-				<input type=button id=replay_simulator value="Replay Simulator" disabled={page == "replay_simulator"} />
+				<!-- <input type=button id=replay_simulator value="Replay Simulator" disabled={page == "replay_simulator"} /> -->
 			</contents>
 		</category>
 		<category>

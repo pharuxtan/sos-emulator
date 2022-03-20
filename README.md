@@ -16,6 +16,8 @@
 
 An application that replicate the [SOS Overlay System](https://gitlab.com/bakkesplugins/sos) WebSocket to avoid test with real rocket league match.
 
+Idea is originally from SilentEcho ([his version here](https://github.com/SilentEchoUK/sos-packages/tree/main/emulator-electron)) and wanted to do my own
+
 ## Todo
 
 - [X] Base application with payloads sending
