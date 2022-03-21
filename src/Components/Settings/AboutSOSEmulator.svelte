@@ -11,7 +11,7 @@
   <p class=description>
     SOS Emulator is an application to help testing Rocket League Overlay made with <span id="https://gitlab.com/bakkesplugins/sos" on:click={linkClick}>SOS</span><br>
     You can view the source of the software here: <span id="https://github.com/pharuxtan/sos-emulator" on:click={linkClick}>https://github.com/pharuxtan/sos-emulator</span><br>
-    Idea is originally from SilentEcho (<span id="https://github.com/SilentEchoUK/sos-monorepo/tree/main/apps/emulator-electron" on:click={linkClick}>his version here</span>), and wanted to do my own
+    Idea is originally from SilentEcho (<span id="https://github.com/SilentEchoUK/sos-monorepo/tree/main/apps" on:click={linkClick}>his version here</span>), and wanted to do my own
   </p>
 </about_sos_emulator>
 
