@@ -46,7 +46,7 @@ export class GameUpdateStatePayload {
     this.newPayload(guid);
     if(localStorage.getItem(this.payload.event)) this.payload = JSON.parse(localStorage.getItem(this.payload.event));
 
-    for(let player of Object.values(this.payload.data.players).sort((a,b)=>(Number(a.primary_id)-Number(b.primary_id)))){
+    for(let player of Object.values(this.payload.data.players).sort((a,b)=>(Number(a.id.split("_").slice(-1)[0])-Number(b.id.split("_").slice(-1)[0])))){
       ws.sos.players.push(new Player(0, '', 0, player));
     }
   }
@@ -113,7 +113,7 @@ export class GameUpdateStatePayload {
     }
 
     // Setup new players
-    for(let player of Object.values(this.payload.data.players).sort((a,b)=>(Number(a.primary_id)-Number(b.primary_id)))){
+    for(let player of Object.values(this.payload.data.players).sort((a,b)=>(Number(a.id.split("_").slice(-1)[0])-Number(b.id.split("_").slice(-1)[0])))){
       this.ws.sos.players.push(new Player(0, '', 0, player));
     }
   }

@@ -177,7 +177,7 @@
     <div class=separator></div>
     <div class=names>
       <p>Name: <input type=text value={payload_values.name} on:input={inputName} /></p>
-      <p>Primary ID: <input type=text value={name.split("_")[1].split("]")[0]} readonly /></p>
+      <p>Primary ID: <input type=text value={payload.primary_id} /></p>
       <p>ID: <input type=text value={name.split("[")[1].split("]")[0]} readonly /></p>
       <p>Shortcut: <input type=text value={Number(name.split("_")[1].split("]")[0])-1} readonly /></p>
     </div>

@@ -88,7 +88,6 @@ export class Player {
 
   setId(id: number){
     let old_id = this.player.id;
-    this.player.primary_id = ''+id;
     this.player.shortcut = id-1;
     this.player.id = `${this.player.name}_${id}`;
     this.changeName(this.player.name, this.player.id);
@@ -99,7 +98,7 @@ export class Player {
   setName(name: string){
     let old_id = this.player.id;
     this.player.name = name;
-    this.player.id = `${name}_${this.player.primary_id}`;
+    this.player.id = `${name}_${old_id.split("_").slice(-1)[0]}`;
     this.changeName(this.player.name, this.player.id);
     if(this.setState)
       this.setState(old_id, this.player.id);
