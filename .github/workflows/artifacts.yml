@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  build-tauri:
+  build-emulator:
     strategy:
       fail-fast: false
       matrix:
