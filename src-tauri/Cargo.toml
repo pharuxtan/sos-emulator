@@ -1,6 +1,6 @@
 [package]
 name = "sos-emulator"
-version = "1.0.0"
+version = "0.1.0"
 description = "Emulate Rocket League SOS Plugin WebSocket"
 authors = [ "pharuxtan" ]
 repository = ""
