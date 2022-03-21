@@ -30,6 +30,21 @@ jobs:
         sudo apt-get install -y libgtk-3-dev webkit2gtk-4.0 libappindicator3-dev librsvg2-dev patchelf
     - name: install app dependencies and build it
       run: yarn && yarn build
-    - uses: tauri-apps/tauri-action@v0
+    - uses: tauri-apps/tauri-action@dev
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - uses: actions/upload-artifact@v2
+      if: matrix.platform == 'ubuntu-latest'
+      with:
+        name: linux-sos-emulator
+        path: src-tauri/target/release/bundle/*
+    - uses: actions/upload-artifact@v2
+      if: matrix.platform == 'windows-latest'
+      with:
+        name: windows-sos-emulator
+        path: src-tauri/target/release/bundle/msi/*
+    - uses: actions/upload-artifact@v2
+      if: matrix.platform == 'macos-latest'
+      with:
+        name: macos-sos-emulator
+        path: src-tauri/target/release/bundle/dmg/*
