@@ -17,29 +17,12 @@ static mut win_listener: Option<tauri::EventHandler> = None;
 
 #[tauri::command]
 pub fn init_sos_server(window: Window, port: String) -> Result<(), String> {
-  // Check if port is already open
-  drop(TcpListener::bind(format!("127.0.0.1:{}", port.clone())).map_err(|e| e.to_string())?);
+  match TcpStream::connect(format!("127.0.0.1:{}", port.clone())) {
+    Ok(stream) => { drop(stream); return Err("already in use".to_string()) },
+    Err(_) => ()
+  };
 
-  // Open WebSocket
   let lport = port.clone();
-  spawn (move || -> Result<(), String> {
-    let listener = TcpListener::bind(format!("127.0.0.1:{}", lport)).unwrap();
-    unsafe {
-      for stream in listener.incoming() {
-        if closed { break };
-        match stream {
-          Ok(s) => {
-            let websocket = accept(s).unwrap();
-            websockets.push(websocket);
-          },
-          Err(e) => { eprintln!("{}", e); continue }
-        }
-      }
-      closed = false;
-    }
-    drop(listener);
-    Ok(())
-  });
 
   // Create listener
   unsafe {
@@ -72,5 +55,28 @@ pub fn init_sos_server(window: Window, port: String) -> Result<(), String> {
       }
     }));
   }
+
+  // Open WebSocket
+  let l = spawn (move || -> Result<(), String> {
+    let listener = TcpListener::bind(format!("127.0.0.1:{}", lport)).map_err(|e| e.to_string())?;
+    spawn (move || unsafe {
+      for stream in listener.incoming() {
+        if closed { break };
+        match stream {
+          Ok(s) => {
+            let websocket = accept(s).unwrap();
+            websockets.push(websocket);
+          },
+          Err(e) => { eprintln!("{}", e); continue }
+        }
+      }
+      closed = false;
+      drop(listener);
+    });
+    Ok(())
+  });
+
+  l.join().unwrap()?;
+
   Ok(())
-} 
+}
