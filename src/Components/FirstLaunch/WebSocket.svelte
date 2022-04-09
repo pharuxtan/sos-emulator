@@ -28,6 +28,7 @@
   }
 
   async function wsopen(){
+    sos.ws.opened_before = true;
     if(value == "0"){
       return sos.popup.showPopup(
           `This port configuration is not supported`,
