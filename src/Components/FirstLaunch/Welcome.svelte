@@ -43,11 +43,11 @@
   welcome {
     position: absolute;
     top: 170px;
-    left: 207px;
+    left: 187px;
 
     z-index: 1;
 
-    width: 610px;
+    width: 650px;
     height: 180px;
 
     -webkit-user-select: none;
@@ -60,7 +60,7 @@
       top: 0px;
       left: 0px;
 
-      width: 610px;
+      width: 650px;
       text-align: center;
 
       font-weight: 800;
@@ -72,7 +72,7 @@
       top: 60px;
       left: 0px;
 
-      width: 610px;
+      width: 650px;
       text-align: center;
 
       font-weight: normal;
@@ -82,7 +82,7 @@
     getstarted {
       position: absolute;
       top: 115px;
-      left: 223px;
+      left: 245px;
 
       width: 160px;
       height: 50px;
