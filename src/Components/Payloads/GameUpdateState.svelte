@@ -284,7 +284,7 @@
       <div class=blue>
         <p class=team>Blue</p>
         <p class=name>Name: <input type=text bind:value={payload.data.game.teams[0].name} /></p>
-        <p class=score>Score: <input type=number bind:value={blue_score} min=0 on:beforeinput={sos.filter.number} on:input={inputBlueScore} /></p>
+        <p class=score>Score: <input type=text bind:value={blue_score} on:beforeinput={sos.filter.number} on:input={inputBlueScore} /></p>
         <div class=color>
           <p>Primary color:</p>
           <ColorPicker bind:color={blue.color_primary} showSliders={{"hsl.h": true}} collapse={true} matrixWidth={200} matrixHeight={200} scrollbarHeight={25} selectDimensions={false} showNumeric={false} showLabels={false} handleWidth={20} handleHeight={20} />
@@ -297,7 +297,7 @@
       <div class=orange>
         <p class=team>Orange</p>
         <p class=name>Name: <input type=text bind:value={payload.data.game.teams[1].name} /></p>
-        <p class=score>Score: <input type=number bind:value={orange_score} min=0 on:beforeinput={sos.filter.number} on:input={inputOrangeScore} /></p>
+        <p class=score>Score: <input type=text bind:value={orange_score} on:beforeinput={sos.filter.number} on:input={inputOrangeScore} /></p>
         <div class=color>
           <p>Primary color:</p>
           <ColorPicker bind:color={orange.color_primary} showSliders={{"hsl.h": true}} collapse={true} matrixWidth={200} matrixHeight={200} scrollbarHeight={25} selectDimensions={false} showNumeric={false} showLabels={false} handleWidth={20} handleHeight={20} />
@@ -356,7 +356,7 @@
 		font-size: 1.5em;
   }
 
-  input[type=text], input[type=number] {
+  input[type=text] {
     display: inline;
 
     padding: 5px 15px;

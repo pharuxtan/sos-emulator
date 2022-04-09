@@ -185,7 +185,7 @@
       <p>Team: </p>
       <Select items={teams} value={team} on:select={selectTeam} isSearchable={false} />
     </div>
-    <p class=boost>Boost: <input type=number min=0 max=100 value={payload_values.boost} on:beforeinput={filterBoost} on:input={inputBoost} /></p>
+    <p class=boost>Boost: <input type=text value={payload_values.boost} on:beforeinput={filterBoost} on:input={inputBoost} /></p>
     <p>Speed: <input type=text value={payload_values.speed} on:beforeinput={sos.filter.float} on:input={inputSpeed} /></p>
     <div class=switch>
       <p>Is powersliding:</p>
@@ -225,16 +225,16 @@
     <p class=title>Scoreboard</p>
     <div class=scoreboard>
       <div>
-        <p>Score: <input type=number id=score value={scoreboard.score} min=0 on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
-        <p>Goals: <input type=number id=goals value={scoreboard.goals} min=0 on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
-        <p>Assists: <input type=number id=assists value={scoreboard.assists} min=0 on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
-        <p>Saves: <input type=number id=saves value={scoreboard.saves} min=0 on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
-        <p>Shots: <input type=number id=shots value={scoreboard.shots} min=0 on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
+        <p>Score: <input type=text id=score value={scoreboard.score} on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
+        <p>Goals: <input type=text id=goals value={scoreboard.goals} on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
+        <p>Assists: <input type=text id=assists value={scoreboard.assists} on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
+        <p>Saves: <input type=text id=saves value={scoreboard.saves} on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
+        <p>Shots: <input type=text id=shots value={scoreboard.shots} on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
       </div>
       <div>
-        <p>Demolitions: <input type=number id=demos value={scoreboard.demos} min=0 on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
-        <p>Ball touches: <input type=number id=touches value={scoreboard.touches} min=0 on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
-        <p>Car touches: <input type=number id=cartouches value={scoreboard.cartouches} min=0 on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
+        <p>Demolitions: <input type=text id=demos value={scoreboard.demos} on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
+        <p>Ball touches: <input type=text id=touches value={scoreboard.touches} on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
+        <p>Car touches: <input type=text id=cartouches value={scoreboard.cartouches} on:beforeinput={sos.filter.number} on:input={inputScoreboard} /></p>
       </div>
     </div>
   </div>
@@ -259,7 +259,7 @@
       background-color: #0000;
     }
 
-    input[type=text], input[type=number] {
+    input[type=text] {
       display: inline;
 
       padding: 5px 15px;
