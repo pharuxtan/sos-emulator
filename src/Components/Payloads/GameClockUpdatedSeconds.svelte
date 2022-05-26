@@ -10,7 +10,7 @@
 
 <game:clock_updated_seconds>
   <p class=title>game:clock_updated_seconds</p>
-  <p class=description>This payload is sent when the players can move after the kick off timer</p>
+  <p class=description>This payload is sent when the seconds of the clock are updated</p>
   <div class=separator></div>
   <input type=button on:click={() => game_clock_updated_seconds.sendPayload()} value="Send the payload" />
   <input type=button on:click={() => sos.payloads.addToQueue(game_clock_updated_seconds.clonePayload())} value="Add payload to queue" />
