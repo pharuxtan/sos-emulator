@@ -27,12 +27,14 @@
   // Arena
 
   let arenas = [];
+  let ko = ["Calavera", "Carbon", "Quadron"]
 
   for(let key of Object.keys(Arena)){
+    let group = ko.includes(Arena[key]) ? "Knockout Bash" : Arena[key].split(" (")[0];
     arenas.push({
       value: key,
       label: `${Arena[key]} [${key}]`,
-      group: Arena[key].split(" (")[0]
+      group
     });
   }
 

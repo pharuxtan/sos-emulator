@@ -99,6 +99,11 @@ export enum Arena {
   // Core 707
   ShatterShot_P = "Core 707",
 
+  /* Knockout Bash Maps */
+  KO_Calavera_P = "Calavera",
+  KO_Carbon_P = "Carbon",
+  KO_Quadron_P = "Quadron",
+
   /* Labs Maps */
 
   // Basin
