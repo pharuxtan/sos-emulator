@@ -138,7 +138,6 @@
       <Select items={secondaries} value={secondary} noOptionsMessage="Select a main target first" on:select={selectSecondary} />
     {/key} {/key}
   </div>
-  <p>Note: secondary target is only sent on <strong>Demolish</strong> event and is the attacker</p>
   <input type=button on:click={() => check(() => game_statfeed_event.sendPayload())} value="Send the payload" />
   <input type=button on:click={resetPayload} value="Reset the payload" />
   <input type=button on:click={() => check(() => sos.payloads.addToQueue(game_statfeed_event.clonePayload()))} value="Add payload to queue" />

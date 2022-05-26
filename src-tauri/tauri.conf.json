@@ -20,12 +20,10 @@
       "category": "DeveloperTool",
       "shortDescription": "Emulate Rocket League SOS Plugin WebSocket",
       "deb": {
-        "depends": [],
-        "useBootstrapper": false
+        "depends": []
       },
       "macOS": {
         "frameworks": [],
-        "useBootstrapper": false,
         "signingIdentity": null,
         "providerShortName": "pharuxtan"
       },
