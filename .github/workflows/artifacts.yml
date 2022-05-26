@@ -36,8 +36,13 @@ jobs:
     - uses: actions/upload-artifact@v2
       if: matrix.platform == 'ubuntu-latest'
       with:
-        name: linux-sos-emulator
-        path: src-tauri/target/release/bundle/*
+        name: linux-appimage-sos-emulator
+        path: src-tauri/target/release/bundle/appimage/*
+    - uses: actions/upload-artifact@v2
+      if: matrix.platform == 'ubuntu-latest'
+      with:
+        name: linux-deb-sos-emulator
+        path: src-tauri/target/release/bundle/deb/*
     - uses: actions/upload-artifact@v2
       if: matrix.platform == 'windows-latest'
       with:
