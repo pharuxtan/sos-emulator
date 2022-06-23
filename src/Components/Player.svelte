@@ -51,29 +51,16 @@
 
   // Boost
 
-  function filterBoost(event){
-    if(!event.data) return;
-    let data = event.data.replace(/[^0-9]/g, '');
-    if(data == '') return event.returnValue = false;
+  function filterBoost(event) {
+    if(!event.data) return
+    if(/[0-9]/g.test(event.data)) return
 
-    let start = this.selectionStart,
-          end = this.selectionEnd;
-
-    let value = [this.value.substring(0, start), data, this.value.substring(end, this.value.length)].join('');
-
-    if(parseInt(value) > 100){
-      value = "100";
-      start = 3;
-    }
-
-    event.returnValue = false;
-    this.value = value;
-
-    this.setSelectionRange(start+data.length, start+data.length);
+    event.preventDefault()
   }
 
   function inputBoost(){
     if(this.value == '') return payload.boost = 0;
+    if(this.value > 100) this.value = 100
     payload.boost = Number(this.value);
   }
 
