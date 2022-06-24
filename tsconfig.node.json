@@ -3,8 +3,8 @@
     "composite": true,
     "module": "esnext",
     "moduleResolution": "node",
-		"importsNotUsedAsValues": "remove",
-		"esModuleInterop": true
+    "importsNotUsedAsValues": "remove",
+    "esModuleInterop": true
   },
   "include": ["vite.config.ts"]
 }

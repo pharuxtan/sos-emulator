@@ -6,9 +6,9 @@ let sos = new SOS();
 import App from './App.svelte';
 
 const app = new App({
-	target: document.body,
-	props: { sos },
-	intro: true
+  target: document.body,
+  props: { sos },
+  intro: true
 });
 
 export default app;

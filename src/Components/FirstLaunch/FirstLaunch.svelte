@@ -3,7 +3,7 @@
   import WebSocket from "./WebSocket.svelte";
   import Welcome from "./Welcome.svelte";
 
-	import { slideSideOut, slideSideIn } from "../../lib/modules/Transitions";
+  import { slideSideOut, slideSideIn } from "../../lib/modules/Transitions";
   import type SOS from "../../lib/SOS";
 
   export let sos: SOS;

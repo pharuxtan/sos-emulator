@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { fly } from 'svelte/transition';
+  import { fly } from 'svelte/transition';
   export let state;
 
   let animate: boolean = false;

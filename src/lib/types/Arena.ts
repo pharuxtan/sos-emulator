@@ -36,6 +36,7 @@ export enum Arena {
   UtopiaStadium_P = "Utopia Coliseum",
   UtopiaStadium_Dusk_P = "Utopia Coliseum (Dusk)",
   UtopiaStadium_Snow_P = "Utopia Coliseum (Snowy)",
+  UtopiaStadium_Lux_P = "Utopia Coliseum (Gilded)",
 
   // Wasteland
   wasteland_s_p = "Wasteland",

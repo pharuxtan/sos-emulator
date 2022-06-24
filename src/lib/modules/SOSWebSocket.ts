@@ -19,7 +19,7 @@ class SOSWebSocket {
   }
 
   close(){
-		appWindow.emit('sos-ws', { type: "close"});
+    appWindow.emit('sos-ws', { type: "close"});
     this.opened = false;
   }
 }

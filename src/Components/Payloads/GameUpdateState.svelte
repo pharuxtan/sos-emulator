@@ -352,10 +352,10 @@
 
 <style lang="scss">
   .subtitle {
-		margin: 10px 0;
+    margin: 10px 0;
 
-		font-weight: 600;
-		font-size: 1.5em;
+    font-weight: 600;
+    font-size: 1.5em;
   }
 
   input[type=text] {
