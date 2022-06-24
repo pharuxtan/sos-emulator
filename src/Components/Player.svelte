@@ -68,6 +68,7 @@
 
     event.returnValue = false;
     this.value = value;
+    inputBoost.call({ value });
 
     this.setSelectionRange(start+data.length, start+data.length);
   }
